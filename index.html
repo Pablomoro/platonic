@@ -5,26 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>La Hipótesis Fuerte de Representación Platónica</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            padding: 20px;
         }
         
         .container {
-            max-width: 900px;
+            max-width: 800px;
             margin: 0 auto;
             background: white;
-            border-radius: 20px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
             overflow: hidden;
         }
         
@@ -36,12 +30,11 @@
         }
         
         .header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin: 0 0 10px 0;
+            font-size: 2rem;
         }
         
-        .language-toggle {
+        .lang-buttons {
             margin-top: 20px;
         }
         
@@ -49,133 +42,90 @@
             background: rgba(255,255,255,0.2);
             color: white;
             border: 2px solid white;
-            padding: 12px 30px;
-            margin: 0 10px;
-            border-radius: 30px;
+            padding: 10px 20px;
+            margin: 0 5px;
+            border-radius: 25px;
             cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
+            font-size: 14px;
             transition: all 0.3s ease;
         }
         
         .lang-btn:hover {
             background: white;
             color: #667eea;
-            transform: translateY(-2px);
         }
         
         .lang-btn.active {
             background: white;
             color: #667eea;
-            transform: scale(1.05);
         }
         
         .content {
-            padding: 40px;
+            padding: 30px;
             display: none;
-            animation: fadeIn 0.5s ease;
         }
         
-        .content.active {
+        .content.show {
             display: block;
         }
         
-        @keyframes fadeIn {
-            from { 
-                opacity: 0; 
-                transform: translateY(20px); 
-            }
-            to { 
-                opacity: 1; 
-                transform: translateY(0); 
-            }
-        }
-        
-        .intro-box {
-            background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
-            padding: 25px;
-            border-radius: 15px;
-            margin-bottom: 30px;
-            border-left: 5px solid #667eea;
-        }
-        
-        .intro-box h2 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-            font-size: 1.3rem;
+        .intro {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            border-left: 4px solid #667eea;
         }
         
         h2 {
             color: #2c3e50;
-            margin: 30px 0 20px 0;
-            font-size: 1.8rem;
-            border-bottom: 3px solid #667eea;
-            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 8px;
+            margin-top: 25px;
         }
         
         h3 {
             color: #34495e;
-            margin: 25px 0 15px 0;
-            font-size: 1.3rem;
+            margin-top: 20px;
         }
         
         p {
+            line-height: 1.6;
             margin-bottom: 15px;
-            color: #333;
             text-align: justify;
-            font-size: 1.1rem;
         }
         
-        .concept-card {
+        .card {
             background: #f8f9fa;
             border: 1px solid #e9ecef;
-            border-radius: 12px;
-            padding: 25px;
-            margin: 20px 0;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            transition: transform 0.3s ease;
-        }
-        
-        .concept-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-        }
-        
-        .concept-card h3 {
-            color: #667eea;
-            margin-top: 0;
-            margin-bottom: 15px;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
         }
         
         .highlight {
             background: #fff3cd;
             border: 1px solid #ffeaa7;
             border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .badge {
+            background: #17a2b8;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            display: inline-block;
         }
         
         .footer {
             background: #2c3e50;
             color: white;
             text-align: center;
-            padding: 20px;
+            padding: 15px;
             font-size: 0.9rem;
-        }
-        
-        strong {
-            color: #667eea;
-            font-weight: 600;
-        }
-        
-        .status-badge {
-            display: inline-block;
-            background: #17a2b8;
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            margin: 10px 0;
         }
     </style>
 </head>
@@ -184,14 +134,15 @@
         <div class="header">
             <h1>La Hipótesis Fuerte de Representación Platónica</h1>
             <p>Un marco teórico para entender cómo las redes neuronales representan el conocimiento</p>
-            <div class="language-toggle">
-                <button class="lang-btn active" onclick="showLanguage('es')">🇪🇸 Español</button>
-                <button class="lang-btn" onclick="showLanguage('en')">🇺🇸 English</button>
+            <div class="lang-buttons">
+                <button class="lang-btn active" onclick="switchLanguage('es', this)">🇪🇸 Español</button>
+                <button class="lang-btn" onclick="switchLanguage('en', this)">🇺🇸 English</button>
             </div>
         </div>
 
-        <div id="es-content" class="content active">
-            <div class="intro-box">
+        <!-- Contenido en Español -->
+        <div id="content-es" class="content show">
+            <div class="intro">
                 <h2>🧠 Definición</h2>
                 <p><strong>La hipótesis fuerte de representación platónica</strong> propone que las redes neuronales artificiales convergen naturalmente hacia representaciones universales y fundamentales de conceptos, independientemente de cómo sean entrenadas.</p>
             </div>
@@ -201,100 +152,92 @@
 
             <h2>🔑 Características Principales</h2>
 
-            <div class="concept-card">
+            <div class="card">
                 <h3>🌐 Universalidad</h3>
                 <p>Las mismas características y patrones emergen consistentemente en diferentes modelos, arquitecturas y métodos de entrenamiento.</p>
             </div>
 
-            <div class="concept-card">
+            <div class="card">
                 <h3>🎯 Convergencia</h3>
                 <p>A pesar de tener diferentes puntos de partida, las redes neuronales tienden a converger hacia soluciones representacionales similares.</p>
             </div>
 
-            <div class="concept-card">
+            <div class="card">
                 <h3>⚡ Optimalidad</h3>
                 <p>Estas representaciones no son simplemente comunes, sino óptimas en algún sentido medible.</p>
             </div>
 
-            <div class="concept-card">
+            <div class="card">
                 <h3>🔄 Consistencia Multimodal</h3>
                 <p>Estructuras representacionales similares emergen a través de diferentes modalidades (visión, lenguaje, audio).</p>
             </div>
 
-            <h2>🚀 Implicaciones para la Inteligencia Artificial</h2>
+            <h2>🚀 Implicaciones para la IA</h2>
 
             <h3>🔍 Interpretabilidad</h3>
             <p>Si esta hipótesis es correcta, podríamos predecir y entender mejor cómo las redes neuronales organizan la información.</p>
 
             <h3>🛡️ Seguridad en IA</h3>
-            <p>Comprender estas representaciones universales podría ayudarnos a desarrollar sistemas de IA más seguros y predecibles.</p>
-
-            <h3>🎓 Aprendizaje por Transferencia</h3>
-            <p>La existencia de representaciones universales explicaría por qué los modelos pre-entrenados se transfieren tan efectivamente.</p>
+            <p>Comprender estas representaciones universales podría ayudarnos a desarrollar sistemas de IA más seguros.</p>
 
             <div class="highlight">
                 <h3>💡 Ejemplo Práctico</h3>
                 <p>Diferentes equipos entrenan redes neuronales para reconocer objetos. Según esta hipótesis, todas desarrollarían representaciones similares para conceptos como "borde" o "textura".</p>
             </div>
 
-            <h2>🔬 Estado Actual de la Investigación</h2>
-            <div class="status-badge">Investigación Activa</div>
+            <h2>🔬 Estado de la Investigación</h2>
+            <div class="badge">Investigación Activa</div>
             <p>Esta hipótesis representa un área muy activa de investigación en interpretabilidad de IA.</p>
         </div>
 
-        <div id="en-content" class="content">
-            <div class="intro-box">
+        <!-- English Content -->
+        <div id="content-en" class="content">
+            <div class="intro">
                 <h2>🧠 Definition</h2>
-                <p><strong>The strong Platonic representation hypothesis</strong> proposes that artificial neural networks naturally converge toward universal and fundamental representations of concepts, regardless of how they are trained. These representations reflect ideal "Platonic forms" that exist beyond the specific details of training.</p>
+                <p><strong>The strong Platonic representation hypothesis</strong> proposes that artificial neural networks naturally converge toward universal and fundamental representations of concepts, regardless of how they are trained.</p>
             </div>
 
             <h2>🎯 Core Concept</h2>
-            <p>Drawing inspiration from <strong>Plato's theory of Forms</strong>, this hypothesis suggests that there exists a set of "perfect" or ideal representations that different neural networks tend to discover when facing similar problems. These representations are not accidental but reflect fundamental structures of the world and knowledge.</p>
+            <p>Drawing inspiration from <strong>Plato's theory of Forms</strong>, this hypothesis suggests that there exists a set of "perfect" or ideal representations that different neural networks tend to discover when facing similar problems.</p>
 
             <h2>🔑 Key Characteristics</h2>
 
-            <div class="concept-card">
+            <div class="card">
                 <h3>🌐 Universality</h3>
-                <p>The same features and patterns emerge consistently across different models, architectures, and training methods. This suggests these representations capture something fundamental about data structure and tasks, not mere training artifacts.</p>
+                <p>The same features and patterns emerge consistently across different models, architectures, and training methods.</p>
             </div>
 
-            <div class="concept-card">
+            <div class="card">
                 <h3>🎯 Convergence</h3>
-                <p>Despite having different starting points, random initializations, and optimization procedures, neural networks tend to converge toward similar representational solutions when addressing comparable problems.</p>
+                <p>Despite having different starting points, neural networks tend to converge toward similar representational solutions.</p>
             </div>
 
-            <div class="concept-card">
+            <div class="card">
                 <h3>⚡ Optimality</h3>
-                <p>These representations are not simply common, but optimal in some measurable sense. They efficiently capture the most important aspects of underlying patterns in data.</p>
+                <p>These representations are not simply common, but optimal in some measurable sense.</p>
             </div>
 
-            <div class="concept-card">
+            <div class="card">
                 <h3>🔄 Cross-modal Consistency</h3>
-                <p>Similar representational structures emerge across different modalities (vision, language, audio) when dealing with related concepts, suggesting deep and universal organizational principles.</p>
+                <p>Similar representational structures emerge across different modalities (vision, language, audio).</p>
             </div>
 
-            <h2>🚀 Implications for Artificial Intelligence</h2>
+            <h2>🚀 Implications for AI</h2>
 
             <h3>🔍 Interpretability</h3>
-            <p>If this hypothesis is correct, we could better predict and understand how neural networks organize information, making AI systems more <strong>interpretable and transparent</strong>.</p>
+            <p>If this hypothesis is correct, we could better predict and understand how neural networks organize information.</p>
 
             <h3>🛡️ AI Safety</h3>
-            <p>Understanding these universal representations could help us develop safer and more predictable AI systems, as we could anticipate certain behaviors and representational structures.</p>
-
-            <h3>🎓 Transfer Learning</h3>
-            <p>The existence of universal representations would explain why pre-trained models transfer so effectively across different tasks and domains.</p>
+            <p>Understanding these universal representations could help us develop safer AI systems.</p>
 
             <div class="highlight">
                 <h3>💡 Practical Example</h3>
-                <p>Imagine different research teams training neural networks for object recognition, using different datasets and architectures. According to this hypothesis, all these networks would develop similar internal representations for concepts like "edge," "texture," or "shape," because these are fundamental features of the visual world.</p>
+                <p>Different teams training object recognition networks would develop similar internal representations for concepts like "edge" or "texture".</p>
             </div>
 
-            <h2>🔬 Current Research Status</h2>
-            <div class="status-badge">Active Research</div>
-            <p>This hypothesis represents a very active area of research in AI interpretability. Scientists are investigating whether these universal representations actually exist and can be reliably identified across different architectures and training paradigms.</p>
-
-            <h2>🤔 Alternative Perspectives</h2>
-            <p>Not all researchers agree with this hypothesis. Some argue that neural network representations are highly contingent and context-specific to training, rather than universal. This debate continues to be central in the field of AI interpretability.</p>
+            <h2>🔬 Research Status</h2>
+            <div class="badge">Active Research</div>
+            <p>This hypothesis represents a very active area of research in AI interpretability.</p>
         </div>
 
         <div class="footer">
@@ -303,22 +246,22 @@
     </div>
 
     <script>
-        function showLanguage(lang) {
+        function switchLanguage(lang, button) {
             // Ocultar todo el contenido
-            document.querySelectorAll('.content').forEach(content => {
-                content.classList.remove('active');
-            });
-            
-            // Quitar clase activa de todos los botones
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.remove('active');
+            const allContent = document.querySelectorAll('.content');
+            allContent.forEach(content => {
+                content.classList.remove('show');
             });
             
             // Mostrar el contenido seleccionado
-            document.getElementById(lang + '-content').classList.add('active');
+            document.getElementById('content-' + lang).classList.add('show');
             
-            // Agregar clase activa al botón clickeado
-            event.target.classList.add('active');
+            // Actualizar botones
+            const allButtons = document.querySelectorAll('.lang-btn');
+            allButtons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+            button.classList.add('active');
         }
     </script>
 </body>
